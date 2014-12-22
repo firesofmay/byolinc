@@ -5,7 +5,7 @@
 //main function whose return value is integer.
 //& takes in argc, and argv as params.
 //all programs start with main function
-int main123(int argc, char** argv){
+int main(int argc, char** argv){
 
   //included via stdio.h, callint it with "Hello, world!" args
   puts("Hello, mayank! :)");
