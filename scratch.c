@@ -5,12 +5,22 @@ $ cc -std=c99 -Wall scratch.c -o scratch
 $ ./scratch
 */
 
-int main(int argc, char** argv){
+#ifdef __APPLE__
 
+void hello() {
+  printf("i am mac");
+}
 
-  for(int i = 0; i < 10; i++){
-    puts("Looping!");
-  }
+#else
 
+void hello() {
+  printf("i am not mac");
+}
+
+#endif
+
+int main(int argc, char** argv) {
+
+  hello();
   return 0;
 }
