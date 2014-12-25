@@ -1,9 +1,13 @@
 #include <stdio.h>
 
-/* buffer for user input
-global array
-static keyword makes this local to this file*/
-static char input[2048];
+//gives access to free function
+#include <stdlib.h>
+
+//gives access to editline function
+#include <editline/readline.h>
+
+//this is not required on Mac OSX
+//#include <editline/history.h>
 
 int main(int argc, char** argv){
 
@@ -14,16 +18,25 @@ int main(int argc, char** argv){
   while(1){
 
     //output the prompt
-    //stdin/stdout are special variables declared in stdio.h
-    //representing input to and output from the command line.
-    fputs("lispy> ", stdout);
+    //and get user input
+    //readline allocates new memory
+    char* input = readline("lispy> ");
 
-    //read a line of user input of max 2048 size
-    fgets(input, 2048, stdin);
+    //add input to history
+    add_history(input);
 
     //echo input back
-    printf("No you're a %s", input);
+    printf("No you're a %s\n", input);
+
+    //free input allocated by readline.
+    free(input);
   }
 
   return 0;
 }
+
+
+/*
+To compile run this
+$ cc -std=c99 -Wall lispy.c -ledit -o lispy && ./lispy
+*/
