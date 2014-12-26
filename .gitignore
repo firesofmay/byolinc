@@ -28,4 +28,7 @@
 *.x86_64
 *.hex
 
+# Ignore these files.
 lispy
+scratch.c
+scratch
