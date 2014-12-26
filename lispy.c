@@ -1,13 +1,30 @@
 #include <stdio.h>
-
-//gives access to free function
 #include <stdlib.h>
 
+/* If on windows compile these functions */
+#ifdef _WIN32
+#include <string.h>
+
+static char buffer[2048];
+
+/* fake readline function */
+char readline(char* prompt){
+  fputs(prompt, stdout);
+  fgets(buffer, 2048, stdin);
+  char* cpy = malloc(strlen(buffer)+1);
+  strcpy(cpy, buffer);
+  cpy[strlen(cpy)-1] = '\0';
+  return cpy;
+}
+
+/* fake add_history fn */
+void add_history(char* unused)
+{}
+
+#else
 //gives access to editline function
 #include <editline/readline.h>
-
-//this is not required on Mac OSX
-//#include <editline/history.h>
+#endif
 
 int main(int argc, char** argv){
 
